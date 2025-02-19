@@ -14,8 +14,8 @@ Set these environment variables in your Render dashboard:
 1. **Create a new Web Service**
    - Connect your GitHub repository
    - Select the Python runtime environment
-   - Build Command: Leave empty (requirements.txt will be auto-detected)
-   - Start Command: `gunicorn main:app` (already specified in Procfile)
+   - Build Command: `poetry install`
+   - Start Command: `gunicorn main:app`
 
 2. **Setup Database**
    - Create a new PostgreSQL database in Render
