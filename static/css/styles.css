@@ -296,6 +296,29 @@ footer {
     }
 }
 
+/* Offcanvas Menu Styles */
+.offcanvas {
+    background: var(--cyberpunk-black);
+    border-left: 1px solid var(--cyberpunk-purple);
+}
+
+.offcanvas-title {
+    color: var(--cyberpunk-cyan);
+}
+
+.btn-close {
+    filter: invert(1) brightness(200%);
+}
+
+.navbar-toggler {
+    border: 1px solid var(--cyberpunk-cyan);
+    color: var(--cyberpunk-cyan);
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 10px var(--cyberpunk-cyan);
+}
+
 /* Added button alignment styles */
 .d-flex.gap-3 {
     margin: 10px 0;
