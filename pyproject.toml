@@ -1,22 +1,28 @@
-[project]
-name = "repl-nix-workspace"
+[tool.poetry]
+name = "edusphere-landing"
 version = "0.1.0"
-description = "Add your description here"
-requires-python = ">=3.11"
-dependencies = [
-    "email-validator>=2.2.0",
-    "flask-login>=0.6.3",
-    "flask>=3.1.0",
-    "flask-sqlalchemy>=3.1.1",
-    "gunicorn>=23.0.0",
-    "psycopg2-binary>=2.9.10",
-    "python-dotenv>=1.0.1",
-    "requests-oauthlib>=2.0.0",
-    "oauthlib>=3.2.2",
-    "routes>=2.5.1",
-    "sqlalchemy>=2.0.38",
-    "openai>=1.63.2",
-    "flask-wtf>=1.2.2",
-    "twilio>=9.4.5",
-    "authlib>=1.4.1",
-]
+description = "A modern, cyberpunk-inspired landing page for EduSphere Discord bot"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "^3.1.0"
+gunicorn = "^23.0.0"
+flask-sqlalchemy = "^3.1.1"
+flask-login = "^0.6.3"
+requests-oauthlib = "^2.0.0"
+python-dotenv = "^1.0.1"
+psycopg2-binary = "^2.9.10"
+authlib = "^1.4.1"
+sqlalchemy = "^2.0.38"
+email-validator = "^2.2.0"
+routes = "^2.5.1"
+openai = "^1.63.2"
+flask-wtf = "^1.2.2"
+twilio = "^9.4.5"
+oauthlib = "^3.2.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
