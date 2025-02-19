@@ -1,9 +1,12 @@
 :root {
-    --discord-blurple: #5865F2;
-    --discord-green: #57F287;
-    --discord-red: #ED4245;
-    --discord-purple: #9B59B6;
-    --discord-orange: #E67E22;
+    --cyberpunk-black: #0D0D0D;
+    --cyberpunk-purple: #6A00F4;
+    --cyberpunk-cyan: #00D4FF;
+    --cyberpunk-white: #EAEAEA;
+    --cyberpunk-gray: #A1A1A1;
+    --cyberpunk-violet: #8A2BE2;
+    --cyberpunk-gold: #FFD700;
+    --cyberpunk-red: #FF3131;
 }
 
 /* Custom Animations */
@@ -29,36 +32,43 @@
     100% { transform: translateY(-100vh) rotate(360deg); }
 }
 
+@keyframes glow {
+    0% { box-shadow: 0 0 5px var(--cyberpunk-cyan); }
+    50% { box-shadow: 0 0 20px var(--cyberpunk-cyan); }
+    100% { box-shadow: 0 0 5px var(--cyberpunk-cyan); }
+}
+
 /* Page-specific backgrounds */
 .hero-section {
     min-height: 100vh;
-    background: linear-gradient(-45deg, #23272A, #2C2F33, #7289DA, #99AAB5);
+    background: linear-gradient(-45deg, var(--cyberpunk-black), var(--cyberpunk-purple), var(--cyberpunk-violet), var(--cyberpunk-cyan));
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     position: relative;
     overflow: hidden;
+    color: var(--cyberpunk-white);
 }
 
 .music-hero {
-    background: linear-gradient(-45deg, #2C3E50, #3498DB, #9B59B6, #2980B9);
+    background: linear-gradient(-45deg, var(--cyberpunk-purple), var(--cyberpunk-violet), var(--cyberpunk-cyan), var(--cyberpunk-purple));
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
 }
 
 .education-hero {
-    background: linear-gradient(-45deg, #27AE60, #2ECC71, #16A085, #1ABC9C);
+    background: linear-gradient(-45deg, var(--cyberpunk-cyan), #00E5FF, var(--cyberpunk-violet), var(--cyberpunk-cyan));
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
 }
 
 .ticket-hero {
-    background: linear-gradient(-45deg, #E67E22, #D35400, #F39C12, #F1C40F);
+    background: linear-gradient(-45deg, var(--cyberpunk-red), var(--cyberpunk-violet), var(--cyberpunk-purple), var(--cyberpunk-red));
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
 }
 
 .ai-chat-hero {
-    background: linear-gradient(-45deg, #8E44AD, #9B59B6, #2980B9, #3498DB);
+    background: linear-gradient(-45deg, var(--cyberpunk-cyan), var(--cyberpunk-purple), var(--cyberpunk-violet), var(--cyberpunk-cyan));
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
 }
@@ -78,9 +88,14 @@
     position: absolute;
     width: 5px;
     height: 5px;
-    background: rgba(255, 255, 255, 0.5);
+    background: var(--cyberpunk-cyan);
     border-radius: 50%;
     animation: particle 20s linear infinite;
+    opacity: 0.6;
+}
+
+.particle:nth-child(odd) {
+    background: var(--cyberpunk-purple);
 }
 
 .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
@@ -96,31 +111,34 @@
 /* Feature Cards */
 .feature-card {
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--cyberpunk-purple);
+    background: rgba(13, 13, 13, 0.7);
     backdrop-filter: blur(5px);
     position: relative;
     z-index: 2;
+    color: var(--cyberpunk-white);
 }
 
 .feature-card:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px var(--cyberpunk-cyan);
+    border-color: var(--cyberpunk-cyan);
 }
 
-.btn-discord {
-    background-color: var(--discord-blurple);
-    color: white;
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 2;
+.feature-card i {
+    color: var(--cyberpunk-cyan);
 }
 
-.btn-discord:hover {
-    background-color: #4752c4;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+.btn-outline-light {
+    border-color: var(--cyberpunk-cyan);
+    color: var(--cyberpunk-white);
+}
+
+.btn-outline-light:hover {
+    background-color: var(--cyberpunk-cyan);
+    border-color: var(--cyberpunk-cyan);
+    color: var(--cyberpunk-black);
+    box-shadow: 0 0 15px var(--cyberpunk-cyan);
 }
 
 .floating-animation {
@@ -135,41 +153,82 @@
     border-radius: 10px;
     max-height: 300px;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    border: 2px solid var(--cyberpunk-purple);
 }
 
 .feature-image:hover {
     transform: scale(1.05);
+    border-color: var(--cyberpunk-cyan);
+    box-shadow: 0 0 20px var(--cyberpunk-cyan);
 }
 
 .command-preview {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(13, 13, 13, 0.8);
+    border: 1px solid var(--cyberpunk-purple);
     border-radius: 8px;
     font-family: 'Consolas', monospace;
     padding: 1rem;
     position: relative;
     z-index: 2;
+    color: var(--cyberpunk-cyan);
+}
+
+.command-preview:hover {
+    border-color: var(--cyberpunk-cyan);
+    box-shadow: 0 0 15px var(--cyberpunk-cyan);
 }
 
 .stats-card {
-    background: rgba(88, 101, 242, 0.1);
+    background: rgba(13, 13, 13, 0.8);
+    border: 1px solid var(--cyberpunk-purple);
     border-radius: 12px;
     padding: 20px;
     backdrop-filter: blur(5px);
     position: relative;
     z-index: 2;
     transition: all 0.3s ease;
+    color: var(--cyberpunk-white);
 }
 
 .stats-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-color: var(--cyberpunk-cyan);
+    box-shadow: 0 0 20px var(--cyberpunk-cyan);
+}
+
+.stats-card i {
+    color: var(--cyberpunk-cyan);
 }
 
 /* Content wrapper */
 .content-wrapper {
     position: relative;
     z-index: 2;
+}
+
+/* Navbar customization */
+.navbar {
+    background: rgba(13, 13, 13, 0.9) !important;
+    border-bottom: 1px solid var(--cyberpunk-purple);
+}
+
+.navbar-brand {
+    color: var(--cyberpunk-cyan) !important;
+}
+
+.nav-link {
+    color: var(--cyberpunk-white) !important;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--cyberpunk-cyan) !important;
+}
+
+/* Footer customization */
+footer {
+    background: var(--cyberpunk-black) !important;
+    border-top: 1px solid var(--cyberpunk-purple);
 }
 
 /* Responsive adjustments */
