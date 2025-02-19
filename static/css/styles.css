@@ -310,12 +310,24 @@ footer {
     filter: invert(1) brightness(200%);
 }
 
-.navbar-toggler {
+.menu-btn {
+    background: transparent;
     border: 1px solid var(--cyberpunk-cyan);
     color: var(--cyberpunk-cyan);
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.navbar-toggler:focus {
+.menu-btn:hover {
+    background: var(--cyberpunk-cyan);
+    color: var(--cyberpunk-black);
+    box-shadow: 0 0 15px var(--cyberpunk-cyan);
+}
+
+.menu-btn:focus {
+    outline: none;
     box-shadow: 0 0 10px var(--cyberpunk-cyan);
 }
 
