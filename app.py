@@ -25,11 +25,10 @@ db.init_app(app)
 login_manager.init_app(app)
 login_manager.login_view = 'discord_auth.login'
 
+# Import routes after app is created to avoid circular imports
 with app.app_context():
     import models
+    from routes import *
+    from discord_auth import discord_auth
+    app.register_blueprint(discord_auth)
     db.create_all()
-
-# Import routes after app is created
-from routes import *
-from discord_auth import discord_auth
-app.register_blueprint(discord_auth)

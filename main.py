@@ -1,20 +1,22 @@
-from flask import Flask, render_template, redirect, session, request, url_for
-from requests_oauthlib import OAuth2Session
 import os
+from flask import render_template, redirect, session, request, url_for
+from app import app
 from dotenv import load_dotenv
+import logging
+from flask_login import current_user, login_required
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 
-app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY', os.urandom(24))
+app.secret_key = os.getenv('SESSION_SECRET', os.urandom(24))
 
-DISCORD_CLIENT_ID = "1159874534485262410"
-DISCORD_CLIENT_SECRET = os.getenv('DISCORD_CLIENT_SECRET')
-DISCORD_REDIRECT_URI = os.getenv('DISCORD_REDIRECT_URI', 'https://your-repl-url/callback')
-DISCORD_BOT_INVITE = "https://discord.com/oauth2/authorize?client_id=1159874534485262410&permissions=8&integration_type=0&scope=bot"
-DISCORD_SERVER_INVITE = "https://discord.gg/J3paY6YQkZ"
-
-API_ENDPOINT = 'https://discord.com/api/v10'
+# Make current_user available to templates
+@app.context_processor
+def inject_user():
+    return dict(current_user=current_user)
 
 @app.route('/')
 def index():
@@ -28,10 +30,10 @@ def music():
 def education():
     return render_template('education.html')
 
-
 @app.route('/login')
 def login():
-    discord = OAuth2Session(DISCORD_CLIENT_ID, redirect_uri=DISCORD_REDIRECT_URI, 
+    logger.info("Starting Discord OAuth login process")
+    discord = OAuth2Session(os.getenv('DISCORD_CLIENT_ID'), redirect_uri=os.getenv('DISCORD_REDIRECT_URI'), 
                           scope=['identify', 'email'])
     authorization_url, state = discord.authorization_url(
         'https://discord.com/api/oauth2/authorize')
@@ -40,20 +42,28 @@ def login():
 
 @app.route('/callback')
 def callback():
-    discord = OAuth2Session(DISCORD_CLIENT_ID, redirect_uri=DISCORD_REDIRECT_URI,
-                          state=session.get('oauth2_state'))
-    token = discord.fetch_token(
-        'https://discord.com/api/oauth2/token',
-        client_secret=DISCORD_CLIENT_SECRET,
-        authorization_response=request.url)
-    
-    session['discord_token'] = token
-    user = discord.get(f'{API_ENDPOINT}/users/@me').json()
-    session['user'] = user
-    return redirect('/')
+    logger.info("Received OAuth callback")
+    try:
+        discord = OAuth2Session(os.getenv('DISCORD_CLIENT_ID'), redirect_uri=os.getenv('DISCORD_REDIRECT_URI'),
+                              state=session.get('oauth2_state'))
+        token = discord.fetch_token(
+            'https://discord.com/api/oauth2/token',
+            client_secret=os.getenv('DISCORD_CLIENT_SECRET'),
+            authorization_response=request.url)
+
+        session['discord_token'] = token
+        user = discord.get(f'https://discord.com/api/v10/users/@me').json()
+        session['user'] = user
+        logger.info(f"Successfully authenticated user: {user.get('username')}")
+        return redirect('/')
+    except Exception as e:
+        logger.error(f"Error during OAuth callback: {str(e)}")
+        return redirect('/')
 
 @app.route('/logout')
+@login_required
 def logout():
+    logger.info("User logged out")
     session.clear()
     return redirect('/')
 
@@ -77,3 +87,8 @@ def support():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+else:
+    # In production (Render)
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = gunicorn_logger.handlers
+    app.logger.setLevel(gunicorn_logger.level)

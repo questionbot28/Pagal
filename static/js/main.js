@@ -1,10 +1,16 @@
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return; // Skip empty hash links
+
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const target = document.querySelector(href);
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
 });
 
@@ -27,31 +33,26 @@ document.querySelectorAll('.animate-on-scroll').forEach((element) => {
     observer.observe(element);
 });
 
-// Typing animation for command preview
-function typeWriter(element, text, speed = 50) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-
 // Handle Discord auth UI
 function updateAuthUI(user) {
     const authContainer = document.getElementById('auth-container');
+    if (!authContainer) return;
+
     const loginBtn = document.getElementById('login-btn');
     const userProfile = authContainer.querySelector('.user-profile');
-    
+
     if (user) {
-        loginBtn.classList.add('d-none');
-        userProfile.classList.remove('d-none');
-        userProfile.querySelector('.avatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
-        userProfile.querySelector('.username').textContent = user.username;
+        if (loginBtn) loginBtn.classList.add('d-none');
+        if (userProfile) {
+            userProfile.classList.remove('d-none');
+            const avatar = userProfile.querySelector('.avatar');
+            const username = userProfile.querySelector('.username');
+            if (avatar) avatar.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+            if (username) username.textContent = user.username;
+        }
     } else {
-        loginBtn.classList.remove('d-none');
-        userProfile.classList.add('d-none');
+        if (loginBtn) loginBtn.classList.remove('d-none');
+        if (userProfile) userProfile.classList.add('d-none');
     }
 }
 
@@ -74,9 +75,21 @@ document.querySelectorAll('a').forEach(link => {
     }
 });
 
+// Typing animation for command preview
+function typeWriter(element, text, speed = 50) {
+    if (!element || !text) return;
+
+    let i = 0;
+    element.innerHTML = '';
+
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
         }
     }
-    
+
     type();
 }
 
@@ -105,21 +118,23 @@ if (toggleButton && navbarCollapse) {
 let lastScroll = 0;
 const header = document.querySelector('.navbar');
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll <= 0) {
-        header.classList.remove('navbar-hidden');
-        return;
-    }
-    
-    if (currentScroll > lastScroll && !header.classList.contains('navbar-hidden')) {
-        // Scroll down -> hide header
-        header.classList.add('navbar-hidden');
-    } else if (currentScroll < lastScroll && header.classList.contains('navbar-hidden')) {
-        // Scroll up -> show header
-        header.classList.remove('navbar-hidden');
-    }
-    
-    lastScroll = currentScroll;
-});
+if (header) {
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll <= 0) {
+            header.classList.remove('navbar-hidden');
+            return;
+        }
+
+        if (currentScroll > lastScroll && !header.classList.contains('navbar-hidden')) {
+            // Scroll down -> hide header
+            header.classList.add('navbar-hidden');
+        } else if (currentScroll < lastScroll && header.classList.contains('navbar-hidden')) {
+            // Scroll up -> show header
+            header.classList.remove('navbar-hidden');
+        }
+
+        lastScroll = currentScroll;
+    });
+}
