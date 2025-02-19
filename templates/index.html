@@ -43,20 +43,26 @@
                             <a class="nav-link" href="/support">Support</a>
                         </li>
                         <li class="nav-item mt-3" id="auth-container">
-                            <a href="/login" class="btn btn-outline-light w-100" id="login-btn">
-                                <i class="fab fa-discord me-2"></i>Login with Discord
-                            </a>
-                            <div class="user-profile d-none">
-                                <img src="" alt="User Avatar" class="avatar rounded-circle me-2" style="width: 32px; height: 32px;">
+                            {% if current_user.is_authenticated %}
+                            <div class="user-profile">
+                                <img src="https://cdn.discordapp.com/avatars/{{ current_user.discord_id }}/{{ current_user.avatar }}.png" 
+                                     alt="User Avatar" 
+                                     class="avatar rounded-circle me-2" 
+                                     style="width: 32px; height: 32px;">
                                 <div class="dropdown">
                                     <button class="btn btn-link dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
-                                        <span class="username"></span>
+                                        <span class="username">{{ current_user.username }}</span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                        <li><a class="dropdown-item" href="{{ url_for('discord_auth.logout') }}">Logout</a></li>
                                     </ul>
                                 </div>
                             </div>
+                            {% else %}
+                            <a href="{{ url_for('discord_auth.login') }}" class="btn btn-outline-light w-100" id="login-btn">
+                                <i class="fab fa-discord me-2"></i>Login with Discord
+                            </a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>
