@@ -63,3 +63,26 @@ if (toggleButton && navbarCollapse) {
         navbarCollapse.classList.toggle('show');
     });
 }
+
+// Header show/hide on scroll
+let lastScroll = 0;
+const header = document.querySelector('.navbar');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+        header.classList.remove('navbar-hidden');
+        return;
+    }
+    
+    if (currentScroll > lastScroll && !header.classList.contains('navbar-hidden')) {
+        // Scroll down -> hide header
+        header.classList.add('navbar-hidden');
+    } else if (currentScroll < lastScroll && header.classList.contains('navbar-hidden')) {
+        // Scroll up -> show header
+        header.classList.remove('navbar-hidden');
+    }
+    
+    lastScroll = currentScroll;
+});
