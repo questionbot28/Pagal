@@ -47,6 +47,7 @@
     position: relative;
     overflow: hidden;
     color: var(--cyberpunk-white);
+    padding-top: 80px; /* Add padding for fixed navbar */
 }
 
 .music-hero {
@@ -220,6 +221,13 @@
 
 .navbar-brand {
     color: var(--cyberpunk-cyan) !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.navbar-brand:hover {
+    color: var(--cyberpunk-gold) !important;
 }
 
 .nav-link {
@@ -228,18 +236,6 @@
 
 .nav-link:hover, .nav-link.active {
     color: var(--cyberpunk-cyan) !important;
-}
-
-/*Added Styles*/
-.navbar-brand {
-    color: var(--cyberpunk-cyan) !important;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.navbar-brand:hover {
-    color: var(--cyberpunk-gold) !important;
 }
 
 .dropdown-menu {
@@ -301,10 +297,13 @@ footer {
 @media (max-width: 768px) {
     .hero-section {
         text-align: center;
+        padding-top: 100px; /* Increase padding for mobile */
+        min-height: auto; /* Allow content to determine height */
     }
-    
+
     .ticket-img {
         max-width: 400px;
+        margin-top: 2rem;
     }
 
     .hero-image {
@@ -317,6 +316,15 @@ footer {
 
     .particle {
         display: none;
+    }
+
+    /* Improve text readability on mobile */
+    .display-4 {
+        font-size: 2.5rem;
+    }
+
+    .lead {
+        font-size: 1.1rem;
     }
 }
 
