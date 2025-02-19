@@ -37,6 +37,43 @@ function typeWriter(element, text, speed = 50) {
             element.innerHTML += text.charAt(i);
             i++;
             setTimeout(type, speed);
+
+// Handle Discord auth UI
+function updateAuthUI(user) {
+    const authContainer = document.getElementById('auth-container');
+    const loginBtn = document.getElementById('login-btn');
+    const userProfile = authContainer.querySelector('.user-profile');
+    
+    if (user) {
+        loginBtn.classList.add('d-none');
+        userProfile.classList.remove('d-none');
+        userProfile.querySelector('.avatar').src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+        userProfile.querySelector('.username').textContent = user.username;
+    } else {
+        loginBtn.classList.remove('d-none');
+        userProfile.classList.add('d-none');
+    }
+}
+
+// Check auth status on page load
+fetch('/api/user')
+    .then(response => response.json())
+    .then(user => {
+        if (!user.error) {
+            updateAuthUI(user);
+        }
+    })
+    .catch(console.error);
+
+// Update Discord invite links
+document.querySelectorAll('a[href="#"]').forEach(link => {
+    if (link.textContent.includes('Add to Discord')) {
+        link.href = 'https://discord.com/oauth2/authorize?client_id=1159874534485262410&permissions=8&integration_type=0&scope=bot';
+    } else if (link.textContent.includes('Join')) {
+        link.href = 'https://discord.gg/J3paY6YQkZ';
+    }
+});
+
         }
     }
     
