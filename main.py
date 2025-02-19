@@ -1,26 +1,49 @@
 import os
-from flask import render_template, redirect, session, request, url_for
-from app import app
-from dotenv import load_dotenv
 import logging
+from dotenv import load_dotenv
+from app import app
 from flask_login import current_user, login_required
+from flask_sqlalchemy import SQLAlchemy
+from authlib.integrations.flask_client import OAuth2Session
+
+db = SQLAlchemy(app)
+
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 logger = logging.getLogger(__name__)
 
+# Load environment variables
 load_dotenv()
-
-app.secret_key = os.getenv('SESSION_SECRET', os.urandom(24))
 
 # Make current_user available to templates
 @app.context_processor
 def inject_user():
     return dict(current_user=current_user)
 
+# Error handlers
+@app.errorhandler(404)
+def not_found_error(error):
+    logger.error(f"Page not found: {error}")
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    logger.error(f"Server error: {error}")
+    db.session.rollback()
+    return render_template('500.html'), 500
+
+# Routes 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    try:
+        return render_template('index.html')
+    except Exception as e:
+        logger.error(f"Error rendering index page: {str(e)}")
+        return "An error occurred", 500
 
 @app.route('/music')
 def music():
@@ -85,10 +108,13 @@ def ai_chat():
 def support():
     return render_template('support.html')
 
+app.secret_key = os.getenv('SESSION_SECRET', os.urandom(24))
+
 if __name__ == '__main__':
+    # Development server
     app.run(host='0.0.0.0', port=5000, debug=True)
 else:
-    # In production (Render)
+    # Production (Render)
     gunicorn_logger = logging.getLogger('gunicorn.error')
     app.logger.handlers = gunicorn_logger.handlers
     app.logger.setLevel(gunicorn_logger.level)
