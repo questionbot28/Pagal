@@ -1,6 +1,9 @@
 :root {
     --discord-blurple: #5865F2;
     --discord-green: #57F287;
+    --discord-red: #ED4245;
+    --discord-purple: #9B59B6;
+    --discord-orange: #E67E22;
 }
 
 /* Custom Animations */
@@ -15,34 +18,109 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Custom Styles */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes particle {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-100vh) rotate(360deg); }
+}
+
+/* Page-specific backgrounds */
 .hero-section {
     min-height: 100vh;
-    background: linear-gradient(45deg, #23272A, #2C2F33);
+    background: linear-gradient(-45deg, #23272A, #2C2F33, #7289DA, #99AAB5);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     position: relative;
     overflow: hidden;
 }
 
+.music-hero {
+    background: linear-gradient(-45deg, #2C3E50, #3498DB, #9B59B6, #2980B9);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+.education-hero {
+    background: linear-gradient(-45deg, #27AE60, #2ECC71, #16A085, #1ABC9C);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+.ticket-hero {
+    background: linear-gradient(-45deg, #E67E22, #D35400, #F39C12, #F1C40F);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+.ai-chat-hero {
+    background: linear-gradient(-45deg, #8E44AD, #9B59B6, #2980B9, #3498DB);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+/* Particles */
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: particle 20s linear infinite;
+}
+
+.particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.particle:nth-child(2) { left: 20%; animation-delay: 2s; }
+.particle:nth-child(3) { left: 30%; animation-delay: 4s; }
+.particle:nth-child(4) { left: 40%; animation-delay: 6s; }
+.particle:nth-child(5) { left: 50%; animation-delay: 8s; }
+.particle:nth-child(6) { left: 60%; animation-delay: 10s; }
+.particle:nth-child(7) { left: 70%; animation-delay: 12s; }
+.particle:nth-child(8) { left: 80%; animation-delay: 14s; }
+.particle:nth-child(9) { left: 90%; animation-delay: 16s; }
+
+/* Feature Cards */
 .feature-card {
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 2;
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .btn-discord {
     background-color: var(--discord-blurple);
     color: white;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .btn-discord:hover {
     background-color: #4752c4;
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
 }
 
 .floating-animation {
@@ -57,18 +135,41 @@
     border-radius: 10px;
     max-height: 300px;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.feature-image:hover {
+    transform: scale(1.05);
 }
 
 .command-preview {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     font-family: 'Consolas', monospace;
+    padding: 1rem;
+    position: relative;
+    z-index: 2;
 }
 
 .stats-card {
     background: rgba(88, 101, 242, 0.1);
     border-radius: 12px;
     padding: 20px;
+    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Content wrapper */
+.content-wrapper {
+    position: relative;
+    z-index: 2;
 }
 
 /* Responsive adjustments */
@@ -76,8 +177,12 @@
     .hero-section {
         text-align: center;
     }
-    
+
     .feature-image {
         max-height: 200px;
+    }
+
+    .particle {
+        display: none;
     }
 }
