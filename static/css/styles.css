@@ -225,6 +225,51 @@
     color: var(--cyberpunk-cyan) !important;
 }
 
+/*Added Styles*/
+.navbar-brand {
+    color: var(--cyberpunk-cyan) !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.navbar-brand:hover {
+    color: var(--cyberpunk-gold) !important;
+}
+
+.dropdown-menu {
+    background: var(--cyberpunk-black);
+    border: 1px solid var(--cyberpunk-purple);
+    backdrop-filter: blur(10px);
+}
+
+.dropdown-item {
+    color: var(--cyberpunk-white);
+}
+
+.dropdown-item:hover {
+    background: var(--cyberpunk-purple);
+    color: var(--cyberpunk-cyan);
+}
+
+.dropdown-divider {
+    border-color: var(--cyberpunk-purple);
+}
+
+.login-btn {
+    border-color: var(--cyberpunk-cyan);
+    color: var(--cyberpunk-cyan);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    background: var(--cyberpunk-cyan);
+    color: var(--cyberpunk-black);
+    box-shadow: 0 0 15px var(--cyberpunk-cyan);
+}
+
+
 /* Footer customization */
 footer {
     background: var(--cyberpunk-black) !important;
