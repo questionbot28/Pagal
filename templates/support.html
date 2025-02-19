@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSphere - Support</title>
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark bg-opacity-75">
+        <div class="container">
+            <a class="navbar-brand" href="/">EduSphere</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/music">Music Bot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/education">Education Bot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ticket">Ticket Bot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ai-chat">AI Chat Bot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/support">Support</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section d-flex align-items-center">
+        <div class="container content-wrapper">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8 animate-on-scroll">
+                    <h1 class="display-4 mb-4">Need Help?</h1>
+                    <p class="lead mb-4">We're here to help you get the most out of EduSphere Bot.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="#faq" class="btn btn-discord btn-lg">View FAQ</a>
+                        <a href="#contact" class="btn btn-outline-light btn-lg">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-5">
+        <div class="container content-wrapper">
+            <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+            <div class="row g-4">
+                <div class="col-lg-6 animate-on-scroll">
+                    <div class="feature-card p-4">
+                        <h3><i class="fas fa-question-circle me-2"></i>How do I add the bot?</h3>
+                        <p>Click the "Add to Discord" button on any of our feature pages and follow the authorization process.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate-on-scroll">
+                    <div class="feature-card p-4">
+                        <h3><i class="fas fa-cog me-2"></i>How to configure permissions?</h3>
+                        <p>Use the !setup command in your server to configure bot permissions and features.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate-on-scroll">
+                    <div class="feature-card p-4">
+                        <h3><i class="fas fa-music me-2"></i>Music quality issues?</h3>
+                        <p>Ensure the bot has proper permissions and try adjusting the audio settings using !music settings.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate-on-scroll">
+                    <div class="feature-card p-4">
+                        <h3><i class="fas fa-ticket-alt me-2"></i>Ticket system setup?</h3>
+                        <p>Use !ticket setup to configure categories and support roles for your server.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-dark">
+        <div class="container content-wrapper">
+            <h2 class="text-center mb-5">Get in Touch</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4 animate-on-scroll">
+                    <div class="feature-card p-4 text-center h-100">
+                        <i class="fas fa-discord fa-3x mb-3"></i>
+                        <h3>Discord Support</h3>
+                        <p>Join our support server for real-time assistance</p>
+                        <a href="#" class="btn btn-outline-light">Join Server</a>
+                    </div>
+                </div>
+                <div class="col-md-4 animate-on-scroll">
+                    <div class="feature-card p-4 text-center h-100">
+                        <i class="fas fa-envelope fa-3x mb-3"></i>
+                        <h3>Email Support</h3>
+                        <p>Send us an email for detailed inquiries</p>
+                        <a href="mailto:support@edusphere.bot" class="btn btn-outline-light">Email Us</a>
+                    </div>
+                </div>
+                <div class="col-md-4 animate-on-scroll">
+                    <div class="feature-card p-4 text-center h-100">
+                        <i class="fas fa-book fa-3x mb-3"></i>
+                        <h3>Documentation</h3>
+                        <p>Browse our detailed documentation</p>
+                        <a href="#" class="btn btn-outline-light">View Docs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2024 EduSphere Bot. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
