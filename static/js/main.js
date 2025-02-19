@@ -66,10 +66,10 @@ fetch('/api/user')
     .catch(console.error);
 
 // Update Discord invite links
-document.querySelectorAll('a[href="#"]').forEach(link => {
-    if (link.textContent.includes('Add to Discord')) {
+document.querySelectorAll('a').forEach(link => {
+    if (link.textContent.includes('Add to Discord') || link.textContent.includes('Add EduSphere')) {
         link.href = 'https://discord.com/oauth2/authorize?client_id=1159874534485262410&permissions=8&integration_type=0&scope=bot';
-    } else if (link.textContent.includes('Join')) {
+    } else if (link.textContent.includes('Join') || link.textContent.includes('Community')) {
         link.href = 'https://discord.gg/J3paY6YQkZ';
     }
 });
