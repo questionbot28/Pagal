@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from app import app
 from flask_login import current_user, login_required
 from flask_sqlalchemy import SQLAlchemy
-from authlib.integrations.flask_client import OAuth2Session
+from requests_oauthlib import OAuth2Session
 
 db = SQLAlchemy(app)
 
