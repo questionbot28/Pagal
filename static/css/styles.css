@@ -289,10 +289,22 @@ footer {
     display: block;
 }
 
+/* Ticket image styles */
+.ticket-img {
+    max-width: 1000px;
+    width: 100%;
+    margin: 2rem auto;
+    display: block;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .hero-section {
         text-align: center;
+    }
+    
+    .ticket-img {
+        max-width: 400px;
     }
 
     .hero-image {
