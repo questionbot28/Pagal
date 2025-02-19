@@ -281,10 +281,20 @@ footer {
     border-top: 1px solid var(--cyberpunk-purple);
 }
 
+/* Hero image styles */
+.hero-image {
+    max-width: 600px;
+    width: 100%;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .hero-section {
         text-align: center;
+    }
+
+    .hero-image {
+        max-width: 300px;
     }
 
     .feature-image {
